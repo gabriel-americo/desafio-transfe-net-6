@@ -1,3 +1,8 @@
+using DesafioTransferencia.Data;
+using DesafioTransferencia.Repositories;
+using DesafioTransferencia.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 namespace DesafioTransferencia
 {
     public class Program
@@ -12,6 +17,14 @@ namespace DesafioTransferencia
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddEntityFrameworkSqlServer()
+                .AddDbContext<AppDbContext>(
+                    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
+                );
+
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 
             var app = builder.Build();
 

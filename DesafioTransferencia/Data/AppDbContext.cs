@@ -1,5 +1,6 @@
 ﻿using DesafioTransferencia.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace DesafioTransferencia.Data
 {
@@ -15,6 +16,8 @@ namespace DesafioTransferencia.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); // Isso aplica todas as configurações de mapeamento do assembly atual
+            
             base.OnModelCreating(modelBuilder);
         }
 

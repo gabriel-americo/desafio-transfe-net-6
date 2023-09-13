@@ -1,4 +1,6 @@
-﻿using DesafioTransferencia.Repositories;
+﻿using DesafioTransferencia.Models;
+using DesafioTransferencia.Repositories;
+using DesafioTransferencia.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,52 +18,72 @@ namespace DesafioTransferencia.Controllers
             _context = context;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] User user)
-        {
-            if (user == null)
-            {
-                return BadRequest("Dados inválidos.");
-            }
-
-            // Verifica se o CPF ou e-mail já existem no banco de dados.
-            if (await _context.Users.AnyAsync(u => u.CPF == user.CPF || u.Email == user.Email))
-            {
-                return Conflict("CPF ou e-mail já cadastrados.");
-            }
-
-            // Hash da senha (não esqueça de implementar uma função segura para hash).
-            user.Password = HashPassword(user.Password);
-
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-            return Ok("Usuário criado com sucesso.");
-        }
-
         [HttpGet("{userId}")]
-        public async Task<IActionResult> GetUser(int userId)
+        public async Task<ActionResult<UserModel>> GetUserById(int userId)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _context.GetUserById(userId);
 
             if (user == null)
             {
                 return NotFound("Usuário não encontrado.");
             }
 
-            // Remova campos sensíveis, como senha, antes de retornar os dados.
-            user.Password = null;
+            return Ok(user);
+        }
+
+        [HttpGet("email/{email}")]
+        public async Task<ActionResult<UserModel>> GetUserByEmail(string email)
+        {
+            var user = await _context.GetUserByEmail(email);
+
+            if (user == null)
+            {
+                return NotFound("Usuário não encontrado.");
+            }
 
             return Ok(user);
         }
 
-        // Outros endpoints para consultar e atualizar usuários.
-
-        private string HashPassword(string password)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UserModel>>> GetAllUsers()
         {
-            // Implemente uma função segura para hash de senha aqui.
-            // Não armazene senhas em texto plano no banco de dados.
-            // Use bibliotecas de hashing, como BCrypt ou ASP.NET Identity.
-            throw new NotImplementedException();
+            var users = await _context.GetAllUsers();
+            return Ok(users);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUser(UserModel user)
+        {
+            await _context.CreateUser(user);
+            return CreatedAtAction(nameof(GetUserById), new { userId = user.Id }, user);
+        }
+
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> UpdateUser(int userId, UserModel user)
+        {
+            try
+            {
+                await _context.UpdateUser(user, userId);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("{userId}")]
+        public async Task<IActionResult> DeleteUser(int userId)
+        {
+            try
+            {
+                await _context.DeleteUser(userId);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
