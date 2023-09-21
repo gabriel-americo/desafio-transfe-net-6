@@ -10,5 +10,7 @@ namespace DesafioTransferencia.Repositories.Interfaces
         Task CreateUser(UserModel user);
         Task UpdateUser(UserModel user, int id);
         Task DeleteUser(int userId);
+        Task<bool> IsCpfCnpjUnique(string cpfCnpj);
+        Task<bool> IsEmailUnique(string email);
     }
 }

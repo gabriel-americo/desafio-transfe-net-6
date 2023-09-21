@@ -1,9 +1,6 @@
 ﻿using DesafioTransferencia.Models;
-using DesafioTransferencia.Repositories;
 using DesafioTransferencia.Repositories.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace DesafioTransferencia.Controllers
 {
@@ -54,6 +51,11 @@ namespace DesafioTransferencia.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] UserModel user)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); // Retorna detalhes dos erros de validação ao cliente
+            }
+
             await _userRepository.CreateUser(user);
             return CreatedAtAction(nameof(GetUserById), new { userId = user.Id }, user);
         }
@@ -61,6 +63,11 @@ namespace DesafioTransferencia.Controllers
         [HttpPut("{userId}")]
         public async Task<IActionResult> UpdateUser([FromBody] UserModel user, int userId)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); // Retorna detalhes dos erros de validação ao cliente
+            }
+
             try
             {
                 await _userRepository.UpdateUser(user, userId);

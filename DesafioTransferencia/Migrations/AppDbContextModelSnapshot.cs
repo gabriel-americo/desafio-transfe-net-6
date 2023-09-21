@@ -35,6 +35,9 @@ namespace DesafioTransferencia.Migrations
                     b.Property<int>("PayerId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Value")
                         .HasColumnType("decimal(18,2)");
 
@@ -48,14 +51,14 @@ namespace DesafioTransferencia.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("UserId");
+                        .HasColumnName("Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("CPF")
+                    b.Property<string>("CpfCnpj")
                         .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
 
                     b.Property<string>("Email")
                         .IsRequired()

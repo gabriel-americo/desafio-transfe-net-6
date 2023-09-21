@@ -31,6 +31,18 @@ namespace DesafioTransferencia.Repositories
 
         public async Task CreateUser(UserModel user)
         {
+            // Verificar unicidade do CPF/CNPJ
+            if (await IsCpfCnpjUnique(user.CpfCnpj))
+            {
+                throw new Exception("CPF/CNPJ já cadastrado.");
+            }
+
+            // Verificar unicidade do e-mail
+            if (await IsEmailUnique(user.Email))
+            {
+                throw new Exception("E-mail já cadastrado.");
+            }
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
         }
@@ -57,6 +69,18 @@ namespace DesafioTransferencia.Repositories
                 _context.Users.Remove(user);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<bool> IsCpfCnpjUnique(string cpfCnpj)
+        {
+            // Verificar se o CPF/CNPJ já existe no banco de dados
+            return !await _context.Users.AnyAsync(u => u.CpfCnpj == cpfCnpj);
+        }
+
+        public async Task<bool> IsEmailUnique(string email)
+        {
+            // Verificar se o e-mail já existe no banco de dados
+            return !await _context.Users.AnyAsync(u => u.Email == email);
         }
     }
 }
