@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QR3jZZtNzImtIJd+fUoZQwKMJGt4xrROSgclbDzpgIj2qFqEHmx4umb/fWSDl3gEm4/WpcVskkCs1os8ROUAkA==",
+  "dgSpecHash": "yKtbuM6VIeOanvuG4MA9aQj4YKzBqf/6cJrjIANrEUFY+JOcfjryfVmNLfxEMyIO00KY6haIntYx2/OALs8jAQ==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\.NET-60\\DesafioTransferencia\\DesafioTransferencia\\DesafioTransferencia.csproj",
+  "projectFilePath": "C:\\Projects\\.NET-6\\DesafioTransferencia\\DesafioTransferencia\\DesafioTransferencia.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Gabriel\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Gabriel\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\.NET-60\\DesafioTransferencia\\DesafioTransferencia\\DesafioTransferencia.csproj": {}
+    "C:\\Projects\\.NET-6\\DesafioTransferencia\\DesafioTransferencia\\DesafioTransferencia.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\.NET-60\\DesafioTransferencia\\DesafioTransferencia\\DesafioTransferencia.csproj": {
+    "C:\\Projects\\.NET-6\\DesafioTransferencia\\DesafioTransferencia\\DesafioTransferencia.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\.NET-60\\DesafioTransferencia\\DesafioTransferencia\\DesafioTransferencia.csproj",
+        "projectUniqueName": "C:\\Projects\\.NET-6\\DesafioTransferencia\\DesafioTransferencia\\DesafioTransferencia.csproj",
         "projectName": "DesafioTransferencia",
-        "projectPath": "C:\\Projects\\.NET-60\\DesafioTransferencia\\DesafioTransferencia\\DesafioTransferencia.csproj",
+        "projectPath": "C:\\Projects\\.NET-6\\DesafioTransferencia\\DesafioTransferencia\\DesafioTransferencia.csproj",
         "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\.NET-60\\DesafioTransferencia\\DesafioTransferencia\\obj\\",
+        "outputPath": "C:\\Projects\\.NET-6\\DesafioTransferencia\\DesafioTransferencia\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Gabriel\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -84,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

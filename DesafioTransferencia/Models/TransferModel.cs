@@ -1,4 +1,6 @@
-﻿namespace DesafioTransferencia.Models
+﻿using System.Transactions;
+
+namespace DesafioTransferencia.Models
 {
     public class TransferModel
     {
@@ -6,5 +8,6 @@
         public decimal Value { get; set; }
         public int PayerId { get; set; }
         public int PayeeId { get; set; }
+        public TransactionStatus Status { get; set; }
     }
 }

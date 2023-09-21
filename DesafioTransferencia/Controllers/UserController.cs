@@ -11,17 +11,17 @@ namespace DesafioTransferencia.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserRepository _context;
+        private readonly IUserRepository _userRepository;
 
-        public UserController(UserRepository context)
+        public UserController(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
 
         [HttpGet("{userId}")]
         public async Task<ActionResult<UserModel>> GetUserById(int userId)
         {
-            var user = await _context.GetUserById(userId);
+            var user = await _userRepository.GetUserById(userId);
 
             if (user == null)
             {
@@ -34,7 +34,7 @@ namespace DesafioTransferencia.Controllers
         [HttpGet("email/{email}")]
         public async Task<ActionResult<UserModel>> GetUserByEmail(string email)
         {
-            var user = await _context.GetUserByEmail(email);
+            var user = await _userRepository.GetUserByEmail(email);
 
             if (user == null)
             {
@@ -47,23 +47,23 @@ namespace DesafioTransferencia.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserModel>>> GetAllUsers()
         {
-            var users = await _context.GetAllUsers();
+            var users = await _userRepository.GetAllUsers();
             return Ok(users);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser(UserModel user)
+        public async Task<IActionResult> CreateUser([FromBody] UserModel user)
         {
-            await _context.CreateUser(user);
+            await _userRepository.CreateUser(user);
             return CreatedAtAction(nameof(GetUserById), new { userId = user.Id }, user);
         }
 
         [HttpPut("{userId}")]
-        public async Task<IActionResult> UpdateUser(int userId, UserModel user)
+        public async Task<IActionResult> UpdateUser([FromBody] UserModel user, int userId)
         {
             try
             {
-                await _context.UpdateUser(user, userId);
+                await _userRepository.UpdateUser(user, userId);
                 return NoContent();
             }
             catch (Exception ex)
@@ -77,7 +77,7 @@ namespace DesafioTransferencia.Controllers
         {
             try
             {
-                await _context.DeleteUser(userId);
+                await _userRepository.DeleteUser(userId);
                 return NoContent();
             }
             catch (Exception ex)
