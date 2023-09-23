@@ -28,19 +28,6 @@ namespace DesafioTransferencia.Controllers
             return Ok(user);
         }
 
-        [HttpGet("email/{email}")]
-        public async Task<ActionResult<UserModel>> GetUserByEmail(string email)
-        {
-            var user = await _userRepository.GetUserByEmail(email);
-
-            if (user == null)
-            {
-                return NotFound("Usuário não encontrado.");
-            }
-
-            return Ok(user);
-        }
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserModel>>> GetAllUsers()
         {

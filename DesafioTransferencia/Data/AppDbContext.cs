@@ -8,7 +8,7 @@ namespace DesafioTransferencia.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            
+
         }
 
         public DbSet<UserModel> Users { get; set; }
@@ -17,7 +17,7 @@ namespace DesafioTransferencia.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); // Isso aplica todas as configurações de mapeamento do assembly atual
-            
+
             base.OnModelCreating(modelBuilder);
         }
 

@@ -37,7 +37,7 @@ namespace DesafioTransferencia.Data.Map
                 .HasColumnType("decimal(18, 2)");
 
             builder
-                .Property(u => u.IsMerchant)
+                .Property(u => u.UserType)
                 .IsRequired();
         }
     }

@@ -68,12 +68,12 @@ namespace DesafioTransferencia.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IsMerchant")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserType")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("WalletBalance")
                         .HasColumnType("decimal(18,2)");

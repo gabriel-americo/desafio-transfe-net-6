@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DesafioTransferencia.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230921200210_InitialDB")]
+    [Migration("20230921204450_InitialDB")]
     partial class InitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,12 +70,12 @@ namespace DesafioTransferencia.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IsMerchant")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserType")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("WalletBalance")
                         .HasColumnType("decimal(18,2)");

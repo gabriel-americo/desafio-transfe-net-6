@@ -19,11 +19,6 @@ namespace DesafioTransferencia.Repositories
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
         }
 
-        public async Task<UserModel> GetUserByEmail(string email)
-        {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-        }
-
         public async Task<IEnumerable<UserModel>> GetAllUsers()
         {
             return await _context.Users.ToListAsync();
@@ -74,13 +69,13 @@ namespace DesafioTransferencia.Repositories
         public async Task<bool> IsCpfCnpjUnique(string cpfCnpj)
         {
             // Verificar se o CPF/CNPJ já existe no banco de dados
-            return !await _context.Users.AnyAsync(u => u.CpfCnpj == cpfCnpj);
+            return await _context.Users.AnyAsync(u => u.CpfCnpj == cpfCnpj);
         }
 
         public async Task<bool> IsEmailUnique(string email)
         {
             // Verificar se o e-mail já existe no banco de dados
-            return !await _context.Users.AnyAsync(u => u.Email == email);
+            return await _context.Users.AnyAsync(u => u.Email == email);
         }
     }
 }

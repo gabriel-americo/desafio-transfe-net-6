@@ -35,7 +35,7 @@ namespace DesafioTransferencia.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WalletBalance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IsMerchant = table.Column<int>(type: "int", nullable: false)
+                    UserType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
