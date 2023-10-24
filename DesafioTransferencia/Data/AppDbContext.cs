@@ -12,7 +12,7 @@ namespace DesafioTransferencia.Data
         }
 
         public DbSet<UserModel> Users { get; set; }
-        public DbSet<TransferModel> Transfers { get; set; }
+        public DbSet<TransactionModel> Transaction { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -20,7 +20,7 @@ namespace DesafioTransferencia.Data.Map
                 .IsRequired();
 
             builder
-                .Property(u => u.CpfCnpj)
+                .Property(u => u.Document)
                 .IsRequired()
                 .HasMaxLength(14);
 

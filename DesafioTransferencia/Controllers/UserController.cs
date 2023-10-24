@@ -16,7 +16,7 @@ namespace DesafioTransferencia.Controllers
         }
 
         [HttpGet("{userId}")]
-        public async Task<ActionResult<UserModel>> GetUserById(int userId)
+        public async Task<ActionResult<UserModel>> GetUserById(Guid userId)
         {
             var user = await _userRepository.GetUserById(userId);
 
@@ -48,7 +48,7 @@ namespace DesafioTransferencia.Controllers
         }
 
         [HttpPut("{userId}")]
-        public async Task<IActionResult> UpdateUser([FromBody] UserModel user, int userId)
+        public async Task<IActionResult> UpdateUser([FromBody] UserModel user, Guid userId)
         {
             if (!ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace DesafioTransferencia.Controllers
         }
 
         [HttpDelete("{userId}")]
-        public async Task<IActionResult> DeleteUser(int userId)
+        public async Task<IActionResult> DeleteUser(Guid userId)
         {
             try
             {

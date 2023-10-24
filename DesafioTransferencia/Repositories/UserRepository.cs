@@ -14,9 +14,9 @@ namespace DesafioTransferencia.Repositories
             _context = appContext;
         }
 
-        public async Task<UserModel> GetUserById(int userId)
+        public async Task<UserModel> GetUserById(Guid userId)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            return await _context.Users.FindAsync(userId);
         }
 
         public async Task<IEnumerable<UserModel>> GetAllUsers()
@@ -26,10 +26,10 @@ namespace DesafioTransferencia.Repositories
 
         public async Task CreateUser(UserModel user)
         {
-            // Verificar unicidade do CPF/CNPJ
-            if (await IsCpfCnpjUnique(user.CpfCnpj))
+            // Verificar unicidade do Documento
+            if (await IsDocumentUnique(user.Document))
             {
-                throw new Exception("CPF/CNPJ já cadastrado.");
+                throw new Exception("Documento já cadastrado.");
             }
 
             // Verificar unicidade do e-mail
@@ -42,7 +42,7 @@ namespace DesafioTransferencia.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateUser(UserModel user, int id)
+        public async Task UpdateUser(UserModel user, Guid id)
         {
             UserModel userId = await GetUserById(id);
 
@@ -55,9 +55,9 @@ namespace DesafioTransferencia.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteUser(int userId)
+        public async Task DeleteUser(Guid userId)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _context.Users.FindAsync(userId);
 
             if (user != null)
             {
@@ -66,10 +66,10 @@ namespace DesafioTransferencia.Repositories
             }
         }
 
-        public async Task<bool> IsCpfCnpjUnique(string cpfCnpj)
+        public async Task<bool> IsDocumentUnique(string document)
         {
             // Verificar se o CPF/CNPJ já existe no banco de dados
-            return await _context.Users.AnyAsync(u => u.CpfCnpj == cpfCnpj);
+            return await _context.Users.AnyAsync(u => u.Document == document);
         }
 
         public async Task<bool> IsEmailUnique(string email)

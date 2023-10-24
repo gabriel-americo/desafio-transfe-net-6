@@ -39,7 +39,7 @@ namespace DesafioTransferencia.Tests
             var newUser = new UserModel
             {
                 FullName = "Novo Usuário",
-                CpfCnpj = "12345678901",
+                Document = "12345678901",
                 Email = "novo@email.com",
                 Password = "senha",
                 WalletBalance = 100.0m,
@@ -63,7 +63,7 @@ namespace DesafioTransferencia.Tests
             var existingUser = new UserModel
             {
                 FullName = "Usuário Existente",
-                CpfCnpj = "11111111111",
+                Document = "11111111111",
                 Email = "emailexistente@email.com",
                 Password = "senha",
                 WalletBalance = 50.0m,
@@ -77,7 +77,7 @@ namespace DesafioTransferencia.Tests
             var newUser = new UserModel
             {
                 FullName = "Novo Usuário",
-                CpfCnpj = "12345678901",
+                Document = "12345678901",
                 Email = "emailexistente@email.com", // E-mail duplicado
                 Password = "senha",
                 WalletBalance = 100.0m,
