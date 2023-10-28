@@ -24,7 +24,7 @@ namespace DesafioTransferencia
                 );
 
             builder.Services.AddScoped<IUserRepository, UserRepository>();
-
+            builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
             var app = builder.Build();
 

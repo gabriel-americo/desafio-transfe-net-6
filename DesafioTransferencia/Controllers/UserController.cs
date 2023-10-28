@@ -15,10 +15,23 @@ namespace DesafioTransferencia.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("id/{userId}")]
         public async Task<ActionResult<UserModel>> GetUserById(Guid userId)
         {
             var user = await _userRepository.GetUserById(userId);
+
+            if (user == null)
+            {
+                return NotFound("Usuário não encontrado.");
+            }
+
+            return Ok(user);
+        }
+
+        [HttpGet("document/{document}")]
+        public async Task<ActionResult<UserModel>> GetUserDocument(string document)
+        {
+            var user = await _userRepository.GetUserByDocument(document);
 
             if (user == null)
             {
@@ -40,7 +53,7 @@ namespace DesafioTransferencia.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState); // Retorna detalhes dos erros de validação ao cliente
+                return BadRequest(ModelState);
             }
 
             await _userRepository.CreateUser(user);
@@ -52,12 +65,12 @@ namespace DesafioTransferencia.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState); // Retorna detalhes dos erros de validação ao cliente
+                return BadRequest(ModelState);
             }
 
             try
             {
-                await _userRepository.UpdateUser(user, userId);
+                await _userRepository.UpdateUser(userId, user);
                 return NoContent();
             }
             catch (Exception ex)

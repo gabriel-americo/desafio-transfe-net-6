@@ -9,14 +9,19 @@ namespace DesafioTransferencia.Repositories
     {
         private readonly AppDbContext _context;
 
-        public UserRepository(AppDbContext appContext)
+        public UserRepository(AppDbContext context)
         {
-            _context = appContext;
+            _context = context;
         }
 
         public async Task<UserModel> GetUserById(Guid userId)
         {
             return await _context.Users.FindAsync(userId);
+        }
+
+        public async Task<UserModel> GetUserByDocument(string document)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Document == document);
         }
 
         public async Task<IEnumerable<UserModel>> GetAllUsers()
@@ -26,13 +31,11 @@ namespace DesafioTransferencia.Repositories
 
         public async Task CreateUser(UserModel user)
         {
-            // Verificar unicidade do Documento
             if (await IsDocumentUnique(user.Document))
             {
                 throw new Exception("Documento já cadastrado.");
             }
 
-            // Verificar unicidade do e-mail
             if (await IsEmailUnique(user.Email))
             {
                 throw new Exception("E-mail já cadastrado.");
@@ -42,28 +45,35 @@ namespace DesafioTransferencia.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateUser(UserModel user, Guid id)
+        public async Task<bool> UpdateUser(Guid userId, UserModel user)
         {
-            UserModel userId = await GetUserById(id);
+            var existingUser = await GetUserById(userId);
 
-            if (userId == null)
+            if (existingUser == null)
             {
-                throw new Exception($"Usuario para o id: {id} não foi encontrado no banco de dados");
+                throw new Exception($"Usuario para o id: {userId} não foi encontrado no banco de dados");
             }
-            
-            _context.Users.Update(user);
+
+            existingUser.FullName = user.FullName;
+            existingUser.Email = user.Email;
+            existingUser.Document = user.Document;
+
             await _context.SaveChangesAsync();
+            return true;
         }
 
-        public async Task DeleteUser(Guid userId)
+        public async Task<bool> DeleteUser(Guid userId)
         {
-            var user = await _context.Users.FindAsync(userId);
+            var user = await GetUserById(userId);
 
             if (user != null)
             {
                 _context.Users.Remove(user);
                 await _context.SaveChangesAsync();
+                return true;
             }
+
+            return false;
         }
 
         public async Task<bool> IsDocumentUnique(string document)
