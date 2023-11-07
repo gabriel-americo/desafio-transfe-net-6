@@ -1,9 +1,12 @@
 ﻿using DesafioTransferencia.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DesafioTransferencia.Models
 {
+    [Table("Users")]
     public class UserModel
     {
+        [Column("Id")]
         public Guid Id { get; set; }
         public string FullName { get; set; }
         public string Document { get; set; }

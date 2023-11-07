@@ -10,6 +10,7 @@ namespace DesafioTransferencia.Repositories.Interfaces
         Task CreateUser(UserModel user);
         Task<bool> UpdateUser(Guid userId, UserModel user);
         Task<bool> DeleteUser(Guid userId);
+        Task<bool> UpdateWalletBalance(Guid userId, decimal newBalance);
         Task<bool> IsDocumentUnique(string document);
         Task<bool> IsEmailUnique(string email);
     }

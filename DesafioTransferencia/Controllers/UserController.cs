@@ -51,11 +51,10 @@ namespace DesafioTransferencia.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] UserModel user)
         {
-            if (!ModelState.IsValid)
+            if(user == null)
             {
-                return BadRequest(ModelState);
+                return BadRequest();
             }
-
             await _userRepository.CreateUser(user);
             return CreatedAtAction(nameof(GetUserById), new { userId = user.Id }, user);
         }
@@ -63,11 +62,6 @@ namespace DesafioTransferencia.Controllers
         [HttpPut("{userId}")]
         public async Task<IActionResult> UpdateUser([FromBody] UserModel user, Guid userId)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             try
             {
                 await _userRepository.UpdateUser(userId, user);
@@ -75,7 +69,7 @@ namespace DesafioTransferencia.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest("Ocorreu um erro ao atualizar o usuário.");
             }
         }
 
@@ -89,7 +83,7 @@ namespace DesafioTransferencia.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest("Ocorreu um erro ao deletar o usuário.");
             }
         }
     }

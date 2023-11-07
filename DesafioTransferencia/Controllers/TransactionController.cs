@@ -18,9 +18,9 @@ namespace DesafioTransferencia.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTransaction([FromBody] TransactionModel transaction)
         {
-            if (!ModelState.IsValid)
+            if (transaction == null)
             {
-                return BadRequest(ModelState); // Retorna detalhes dos erros de validação ao cliente
+                return BadRequest();
             }
 
             await _transactionRepository.CreateTransaction(transaction);
@@ -37,6 +37,13 @@ namespace DesafioTransferencia.Controllers
                 return NotFound("Transação não encontrada.");
             }
 
+            return Ok(transaction);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TransactionModel>>> GetAllTransactions()
+        {
+            var transaction = await _transactionRepository.GetAllTransactions();
             return Ok(transaction);
         }
     }

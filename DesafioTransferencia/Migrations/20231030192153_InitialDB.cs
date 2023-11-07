@@ -16,8 +16,8 @@ namespace DesafioTransferencia.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Value = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PayerId = table.Column<int>(type: "int", nullable: false),
-                    PayeeId = table.Column<int>(type: "int", nullable: false),
+                    PayerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PayeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TransferDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false)
                 },

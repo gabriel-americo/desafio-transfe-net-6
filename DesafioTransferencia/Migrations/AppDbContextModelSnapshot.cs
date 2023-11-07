@@ -31,11 +31,11 @@ namespace DesafioTransferencia.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("PayeeId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("PayeeId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("PayerId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("PayerId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");

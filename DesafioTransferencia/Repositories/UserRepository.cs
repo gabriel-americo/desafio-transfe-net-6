@@ -57,6 +57,8 @@ namespace DesafioTransferencia.Repositories
             existingUser.FullName = user.FullName;
             existingUser.Email = user.Email;
             existingUser.Document = user.Document;
+            existingUser.WalletBalance = user.WalletBalance;
+            existingUser.UserType = user.UserType;
 
             await _context.SaveChangesAsync();
             return true;
@@ -74,6 +76,21 @@ namespace DesafioTransferencia.Repositories
             }
 
             return false;
+        }
+
+        public async Task<bool> UpdateWalletBalance(Guid userId, decimal newBalance)
+        {
+            var user = await GetUserById(userId);
+
+            if (user == null)
+            {
+                throw new Exception($"Usuário com o id: {userId} não encontrado no banco de dados");
+            }
+
+            user.WalletBalance = newBalance;
+
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         public async Task<bool> IsDocumentUnique(string document)
